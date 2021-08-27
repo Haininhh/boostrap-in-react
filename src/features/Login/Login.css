@@ -62,3 +62,14 @@
     border-bottom: 1px dashed #ccc;
     margin: auto;
 }
+
+.Sub__login-leftArr {
+    width: 10px;
+    margin: 0 -4px 2px 0;
+    ;
+}
+
+.form-message {
+    color: red;
+    text-align: left !important;
+}

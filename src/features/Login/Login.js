@@ -10,6 +10,10 @@ const Login = (props) => {
         props.setState("home");
     };
 
+    const handleClick = () => {
+        props.setState("sigup");
+    }
+
     return (
         <div className="content">
            <Router>
@@ -58,7 +62,9 @@ const Login = (props) => {
                             </Form>
                             <div className="Sub__login d-flex align-center justify-between">
                                 <div className="Sub__login-forger blue-cl fw-5">Forgot password?</div>
-                                <div className="Sub__login-newacc blue-cl fw-5">Sig up New Account</div>
+                            <Link to="/sigup" style={{ textDecoration: "none" }}>
+                                <div className="Sub__login-newacc blue-cl fw-5" onClick={handleClick}>Sig up New Account</div>
+                            </Link>
                             </div>
                         </div>
                     </Container>
