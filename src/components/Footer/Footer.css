@@ -1,0 +1,24 @@
+/* commond */
+
+.Footer {
+    border-top: 1px solid #ccc;
+}
+
+.Footer__content {
+    width: 800px !important;
+}
+
+.nav__form {
+    height: max-content;
+    width: 22% !important;
+    margin-left: 40px;
+    border: 1px solid #000 !important;
+    border-radius: unset !important;
+    padding: 0 32px 0 5px !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.nav__link:hover {
+    opacity: 0.6;
+}
