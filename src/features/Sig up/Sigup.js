@@ -9,7 +9,7 @@ import Validation from '../Validation/Validation';
 import Axios from 'axios';
 
 const Sigup = (props) => {
-    const urlApi ="http://localhost:3000/users";
+    const urlApi =("http://localhost:3000/users");
     /* Event */
 
     /* Back to login page */
@@ -39,7 +39,13 @@ const Sigup = (props) => {
     }
     /* End: event */
     
-    fetch(urlApi)
+    fetch(urlApi, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+  
+      })
         .then((response) => response.json())
         .then((users) => console.log(users.response))
 

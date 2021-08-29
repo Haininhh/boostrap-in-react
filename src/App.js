@@ -6,7 +6,7 @@ import Home from './features/Home/Home';
 import Sigup from './features/Sig up/Sigup';
 import SigupSuccess from './features/Sig up/SigupSuccess';
 import Footer from './components/Footer/Footer';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [state, setState] = useState("login");
