@@ -6,9 +6,13 @@
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^11.2.7",
         "@testing-library/user-event": "^12.8.3",
+<<<<<<< HEAD
         "axios": "^0.21.1",
         "bootstrap": "^5.1.0",
         "json-server": "^0.16.3",
+=======
+        "bootstrap": "^5.1.0",
+>>>>>>> e354b11c5bc89f9423c6d3f5564b92538f1e1090
         "react": "^17.0.2",
         "react-bootstrap": "^2.0.0-beta.5",
         "react-dom": "^17.0.2",
@@ -40,4 +44,8 @@
             "last 1 safari version"
         ]
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e354b11c5bc89f9423c6d3f5564b92538f1e1090
