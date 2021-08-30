@@ -9,7 +9,7 @@ import Validation from '../Validation/Validation';
 import Axios from 'axios';
 
 const Sigup = (props) => {
-    const urlApi =("http://localhost:3000/users");
+    const registerAPIUrl =("http://35.213.94.95:8899/api/users/register");
     /* Event */
 
     /* Back to login page */
@@ -31,23 +31,33 @@ const Sigup = (props) => {
 
         setDataIsCorrect(true);
 
-        Axios.post(urlApi, {
+        Axios.post(registerAPIUrl, {
             username: values.username,
-            password: values.password
+            password: values.password,
+            firstname: "a",
+            lastname: "n",
+            email: "32@gmail.com",
+            mobile_number: "",
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
         })
         .then((response) => console.log(response.values));
     }
     /* End: event */
     
-    fetch(urlApi, {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
+    // KHÔNG ĐƯỢC THÊM CODE API VÀO BODY CỦA REACT-COMPOENT, NẾU KHÔNG MỖI LẦN RENDER NÓ SẼ GỌI LẠI
+    // fetch(urlApi, {
+    //     headers : { 
+    //       'Content-Type': 'application/json',
+    //       'Accept': 'application/json'
+    //      }
   
-      })
-        .then((response) => response.json())
-        .then((users) => console.log(users.response))
+    //   })
+    //     .then((response) => response.json())
+    //     .then((users) => console.log(users.response))
 
     const [values, setvalues] = useState({
         username: "",
@@ -57,11 +67,6 @@ const Sigup = (props) => {
 
     const [errors, setErrors] = useState({ Validation });
     const [dataIsCorrect, setDataIsCorrect] = useState(false)
-
-
-    
-
-    
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && dataIsCorrect) {
@@ -101,7 +106,7 @@ const Sigup = (props) => {
                             <div className="Login__Or mrb-3 d-flex">Or</div>
                             <Form className="mrb-3">
                                 <Form.Group className="mrb-3" controlId="formBasicPassword" required>
-                                    <Form.Control id="username" className="Login__form" invalid placeholder="User name" name="username" value={values.username} onChange={handleChange} />
+                                    <Form.Control id="username" className="Login__form" placeholder="User name" name="username" value={values.username} onChange={handleChange} />
                                     <span className="form-message">{errors.username}</span>
                                 </Form.Group>
 
