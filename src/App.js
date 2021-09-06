@@ -9,6 +9,8 @@ import Footer from './components/Footer/Footer';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
+
+
   const [state, setState] = useState("login");
 
   const [formIsSubmitted, setFormIsSubmitted] = useState(false)

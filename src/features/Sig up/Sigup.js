@@ -6,16 +6,13 @@ import search from '../../assets/png/search.png';
 import Left from '../../assets/png/left-arrow.png';
 import '../../features/Login/Login.css';
 import Validation from '../Validation/Validation';
-import Axios from 'axios';
+// import axios from 'axios';
+
 
 const Sigup = (props) => {
-    const urlApi =("http://localhost:3000/users");
+    const registerAPIUrl =("http://35.213.94.95:8899/api/users/register");
     /* Event */
-
-    /* Back to login page */
-    const onClick = () => {
-        props.setState("login");
-    }
+    
     /* Change data */
     const handleChange = (event) => {
         setvalues({
@@ -23,45 +20,39 @@ const Sigup = (props) => {
             [event.target.name]: event.target.value,
         })
     }
+
     /* Default btn and handle api */
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
         setErrors(Validation(values));
-
         setDataIsCorrect(true);
-
-        Axios.post(urlApi, {
-            username: values.username,
-            password: values.password
+        await fetch(registerAPIUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            body: JSON.stringify(formData),
         })
-        .then((response) => console.log(response.values));
     }
     /* End: event */
-    
-    fetch(urlApi, {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-  
-      })
-        .then((response) => response.json())
-        .then((users) => console.log(users.response))
-
     const [values, setvalues] = useState({
-        username: "",
+        username: "", 
         password: "",
         confirm: "",
     });
 
+    const formData = {
+        username: values.username,
+        password: values.password,
+        firstname: "Hbbbccc",
+        lastname: "Nbbcccb",
+        email: "abc123@gmail.com",
+        mobile_number: "0403344421",
+    };
+    
     const [errors, setErrors] = useState({ Validation });
     const [dataIsCorrect, setDataIsCorrect] = useState(false)
-
-
-    
-
-    
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && dataIsCorrect) {
@@ -100,18 +91,18 @@ const Sigup = (props) => {
                             </div>
                             <div className="Login__Or mrb-3 d-flex">Or</div>
                             <Form className="mrb-3">
-                                <Form.Group className="mrb-3" controlId="formBasicPassword" required>
-                                    <Form.Control id="username" className="Login__form" invalid placeholder="User name" name="username" value={values.username} onChange={handleChange} />
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" placeholder="User name" name="username" value={values.username} onChange={handleChange} />
                                     <span className="form-message">{errors.username}</span>
                                 </Form.Group>
 
-                                <Form.Group className="mrb-3" controlId="formBasicPassword" required>
-                                    <Form.Control id="password" className="Login__form" type="password" placeholder="Password" name="password" value={values.password} onChange={handleChange} />
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" type="password" placeholder="Password" name="password" value={values.password} onChange={handleChange} />
                                     <span className="form-message">{errors.password}</span>
                                 </Form.Group>
 
-                                <Form.Group className="mrb-3" controlId="formBasicPassword" required>
-                                    <Form.Control id="confirm-password" className="Login__form" type="password" placeholder="Confirm Password" name="confirm" value={values.confirm} onChange={handleChange} />
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" type="password" placeholder="Confirm Password" name="confirm" value={values.confirm} onChange={handleChange} />
                                     <span className="form-message">{errors.confirm}</span>
                                 </Form.Group>
 
@@ -125,7 +116,7 @@ const Sigup = (props) => {
                             </Form>
                             <div className="Sub__login d-flex align-center justify-between">
                                 <Link to="/login" style={{ textDecoration: "none" }}>
-                                    <div className="Sub__login-newacc blue-cl fw-5" onClick={onClick}><img className="Sub__login-leftArr" src={Left} alt="Left" /> Back</div>
+                                    <div className="Sub__login-newacc blue-cl fw-5" onClick={() => props.setState("login")}><img className="Sub__login-leftArr" src={Left} alt="Left" /> Back</div>
                                 </Link>
                             </div>
                         </div>
