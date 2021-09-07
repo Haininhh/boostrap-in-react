@@ -7,28 +7,26 @@ import Cookies from 'universal-cookie';
 
 
 const Header = (props) => {
-    const userInfoURLApi = 'http://35.213.94.95:8899/api/users'
+    const userInfoURLApi = 'http://35.213.94.95:8899/api/users';
     const [values, setValues] = useState({
         username: "",
     })
+
     /* Get token */
     const cookies = new Cookies();
     const token = cookies.get("token");
 
     /* Get user info */
-    const instance = axios.create({
-        baseURL: userInfoURLApi,
-        headers: {'Authorization': 'Bearer '+ token}
-      });
-      
-    (instance.get('/me').then(response => {
-        values.username = response.data.username;
-        console.log(values.username);
-    }))
+        const instance = axios.create({
+            baseURL: userInfoURLApi,
+            headers: {'Authorization': 'Bearer '+ token}
+        });
         
-    if (token == null) {
-        values.loggedIn = false;
-    }
+        (instance.get('/me').then(response => {
+            values.username = response.data.username;
+            console.log(values.username)
+        }))
+
 
     return (
         <Router>

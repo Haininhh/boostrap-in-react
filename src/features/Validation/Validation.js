@@ -32,10 +32,10 @@ const Validation = (values) => {
         errors.email = "Email is invalid."
     }
     
-    if(!values.phone) {
-        errors.phone = "Phone number required"
-    } else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(values.phone)){
-        errors.phone = "Phone number is invalid"
+    if(!values.mobile_number) {
+        errors.mobile_number = "Phone number required"
+    } else if(!/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(values.mobile_number)){
+        errors.mobile_number = "Phone number is invalid"
     }
 
     return errors;

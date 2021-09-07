@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import '../../features/Login/Login.css';
@@ -38,7 +38,7 @@ const Login = (props) => {
         .then(res => {
             cookies.set("token", res.data.access_token, res.data.username)
             props.setState("home")
-            console.log(res.data.access_token, res.data.username)
+            // console.log(res.data.access_token, res.data.username)
         })
         .catch(err => {
             if(err.response.status === 400 || err.response.status === 401){
@@ -48,6 +48,16 @@ const Login = (props) => {
             }
         })
     };
+
+    const readCookie = () => {
+        const token = cookies.get("token");
+        console.log(token);
+
+    }
+
+    // useEffect(() => {
+    //     readCookie();
+    // }, [])
 
     return (
         <div className="content">

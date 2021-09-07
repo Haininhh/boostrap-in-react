@@ -3,8 +3,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Login from './features/Login/Login';
 import Home from './features/Home/Home';
-import Sigup from './features/Sig up/Sigup';
-import SigupSuccess from './features/Sig up/SigupSuccess';
+import Signup from './features/Signup/Signup';
+import SignupSuccess from './features/Signup/SignupSuccess';
 import Footer from './components/Footer/Footer';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -32,8 +32,8 @@ const App = () => {
 
           <div>
             {!formIsSubmitted ?
-            <Sigup setState={setState} loginState={state} submitForm={submitForm} /> :
-            <SigupSuccess setState={setState}/>
+            <Signup setState={setState} loginState={state} submitForm={submitForm} /> :
+            <SignupSuccess setState={setState}/>
             }
             
           </div>

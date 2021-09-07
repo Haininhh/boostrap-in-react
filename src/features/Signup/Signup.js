@@ -9,7 +9,7 @@ import Validation from '../Validation/Validation';
 // import axios from 'axios';
 
 
-const Sigup = (props) => {
+const Signup = (props) => {
     const registerAPIUrl =("http://35.213.94.95:8899/api/users/register");
     /* Event */
     
@@ -44,7 +44,7 @@ const Sigup = (props) => {
         firstname: "",
         lastname: "",
         email: "",
-        phone: "",
+        mobile_number: "",
     });
 
     const formData = {
@@ -53,7 +53,7 @@ const Sigup = (props) => {
         firstname: values.firstname,
         lastname: values.lastname,
         email: values.email,
-        phone: values.phone,
+        mobile_number: values.mobile_number,
     };
     
     const [errors, setErrors] = useState({ Validation });
@@ -122,13 +122,13 @@ const Sigup = (props) => {
                                 </Form.Group>
 
                                 <Form.Group className="mrb-3" required>
-                                    <Form.Control className="Login__form" placeholder="Email address" name="email" value={values.gmail} onChange={handleChange} />
+                                    <Form.Control className="Login__form" placeholder="Email address" name="email" value={values.email} onChange={handleChange} />
                                     <span className="form-message">{errors.email}</span>
                                 </Form.Group>
 
                                 <Form.Group className="mrb-3" required>
-                                    <Form.Control className="Login__form" placeholder="Phone number" name="phone" value={values.phone} onChange={handleChange} />
-                                    <span className="form-message">{errors.phone}</span>
+                                    <Form.Control className="Login__form" placeholder="Phone number" name="mobile_number" value={values.mobile_number} onChange={handleChange} />
+                                    <span className="form-message">{errors.mobile_number}</span>
                                 </Form.Group>
 
                                 <Link to="/login" style={{ textDecoration: "none" }}>
@@ -154,4 +154,4 @@ const Sigup = (props) => {
     )
 }
 
-export default Sigup;
+export default Signup;

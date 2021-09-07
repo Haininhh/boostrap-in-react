@@ -6,7 +6,7 @@ import '../../features/Login/Login.css';
 
 
 
-const SigupSuccess = (props) => {
+const SignupSuccess = (props) => {
     const onClick = () => {
         props.setState("login");
     }
@@ -37,4 +37,4 @@ const SigupSuccess = (props) => {
     )
 }
 
-export default SigupSuccess;
+export default SignupSuccess;
