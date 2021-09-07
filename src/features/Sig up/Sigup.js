@@ -25,7 +25,7 @@ const Sigup = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(Validation(values));
-        setDataIsCorrect(true);
+        // setDataIsCorrect(true);
         await fetch(registerAPIUrl, {
             method: 'POST',
             headers: {
@@ -34,28 +34,33 @@ const Sigup = (props) => {
             },
             body: JSON.stringify(formData),
         })
+        console.log(formData)
     }
     /* End: event */
     const [values, setvalues] = useState({
         username: "", 
         password: "",
         confirm: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
     });
 
     const formData = {
         username: values.username,
         password: values.password,
-        firstname: "Hbbbccc",
-        lastname: "Nbbcccb",
-        email: "abc123@gmail.com",
-        mobile_number: "0403344421",
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        phone: values.phone,
     };
     
     const [errors, setErrors] = useState({ Validation });
-    const [dataIsCorrect, setDataIsCorrect] = useState(false)
+    // const [dataIsCorrect, setDataIsCorrect] = useState(false)
 
     useEffect(() => {
-        if (Object.keys(errors).length === 0 && dataIsCorrect) {
+        if (Object.keys(errors).length === 0 /* && dataIsCorrect */) {
             props.submitForm(true);
         }
     });
@@ -67,7 +72,7 @@ const Sigup = (props) => {
                     <Container>
                         <div className="Login">
                             <h4 className="Login__heading">
-                                Sig Up
+                                Signup
                             </h4>
                             <div className="Login__add m-0">
                                 <Row className="justify-between mg-row">
@@ -106,10 +111,30 @@ const Sigup = (props) => {
                                     <span className="form-message">{errors.confirm}</span>
                                 </Form.Group>
 
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" placeholder="First name" name="firstname" value={values.firstname} onChange={handleChange} />
+                                    <span className="form-message">{errors.firstname}</span>
+                                </Form.Group>
+
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" placeholder="Last name" name="lastname" value={values.lastname} onChange={handleChange} />
+                                    <span className="form-message">{errors.lastname}</span>
+                                </Form.Group>
+
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" placeholder="Email address" name="email" value={values.gmail} onChange={handleChange} />
+                                    <span className="form-message">{errors.email}</span>
+                                </Form.Group>
+
+                                <Form.Group className="mrb-3" required>
+                                    <Form.Control className="Login__form" placeholder="Phone number" name="phone" value={values.phone} onChange={handleChange} />
+                                    <span className="form-message">{errors.phone}</span>
+                                </Form.Group>
+
                                 <Link to="/login" style={{ textDecoration: "none" }}>
                                     <div className="d-grid gap-2">
                                         <Button variant="primary" size="lg" onClick={handleSubmit}>
-                                            Sign up
+                                            Signup
                                         </Button>
                                     </div>
                                 </Link>

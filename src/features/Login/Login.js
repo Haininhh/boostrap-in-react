@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import '../../features/Login/Login.css';
 import facebook from '../../assets/png/facebook.png';
 import search from '../../assets/png/search.png';
-import { setUserSession } from '../Utils/Common'
-// import Cookies from 'universal-cookie';
+// import { setUserSession } from '../Utils/Common'
+import Cookies from 'universal-cookie';
 import axios from 'axios';
 
 
 
 const Login = (props) => {
+    const cookies = new Cookies();
 
     const [errors, setErrors] = useState(null);
     const loginURLAPI = "http://35.213.94.95:8899/api/users/authenticate";    
@@ -30,23 +31,21 @@ const Login = (props) => {
     const handleLogin = async (e) => {
         setErrors(null)
         e.preventDefault();
-        
         await axios.post(loginURLAPI, {
             username: values.username,
             password: values.password,
         })
         .then(res => {
-            setUserSession(res.data.access_token, res.data.user_id)
-            console.log(res.data)
+            cookies.set("token", res.data.access_token, res.data.username)
             props.setState("home")
+            console.log(res.data.access_token, res.data.username)
         })
         .catch(err => {
-            if(err.response.status === 400 || err.response.status === 400){
-                setErrors("Username or password incorrect. Please try again later!")
+            if(err.response.status === 400 || err.response.status === 401){
+                setErrors("Username or password incorrect. Please try again later!");
             } else {
                 setErrors(err.response.data.message);
             }
-            
         })
     };
 
@@ -54,7 +53,8 @@ const Login = (props) => {
         <div className="content">
            <Router>
                <Switch>
-                    <Container>
+                    <React.Fragment>
+                        <Container>
                         <div className="Login">
                             <h4 className="Login__heading">
                                 Sig In to TeneTest
@@ -104,7 +104,8 @@ const Login = (props) => {
                             </Link>
                             </div>
                         </div>
-                    </Container>
+                        </Container>
+                    </React.Fragment>
                </Switch>
            </Router>
         </div>
