@@ -1,74 +1,76 @@
 /* Commond */
 
 .content {
-    margin-top: 122px;
+  margin-top: 122px;
 }
 
-.Login {
-    width: calc(100%/2.5);
-    text-align: center;
-    margin: 60px auto;
-    padding: 20px 20px 30px;
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+.login {
+  width: calc(100% / 2.5);
+  text-align: center;
+  margin: 60px auto;
+  padding: 20px 20px 30px;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 
-.Login__form {
-    padding: .6rem .75rem !important;
+.login__form {
+  padding: 0.6rem 0.75rem !important;
 }
 
-.Login__add {
-    padding: 20px 0;
+.login__add {
+  padding: 20px 0;
 }
 
-.Login__add-social {
-    padding: 6px 0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    background-color: #fff;
+.login__add-social {
+  padding: 6px 0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #fff;
 }
 
-.Login__add-social:hover {
-    background-color: #ccc;
+.login__add-social:hover {
+  background-color: #ccc;
 }
 
-.Login__add-fb {
-    margin-left: 3px;
+.login__add-fb {
+  margin-left: 3px;
 }
 
-.Login__add-gg {
-    margin-left: 6px;
+.login__add-gg {
+  margin-left: 6px;
 }
 
 .mg-row {
-    margin-right: -8px !important;
-    margin-left: -8px !important;
+  margin-right: -8px !important;
+  margin-left: -8px !important;
 }
 
 .pd-col {
-    padding-right: 8px !important;
-    padding-left: 8px !important;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
 }
 
-.Sub__login-forger,
-.Sub__login-newacc {
-    cursor: pointer;
+.sub__login-forger,
+.sub__login-newacc {
+  cursor: pointer;
 }
 
-.Login__Or::before,
-.Login__Or::after {
-    content: "";
-    flex: 1 1;
-    border-bottom: 1px dashed #ccc;
-    margin: auto;
+.login__or::before,
+.login__or::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px dashed #ccc;
+  margin: auto;
 }
 
-.Sub__login-leftArr {
-    width: 10px;
-    margin: 0 -4px 2px 0;
-    ;
+.sub__login-leftArr {
+  width: 10px;
+  margin: 0 -4px 2px 0;
 }
 
 .form-message {
-    color: red;
-    text-align: left !important;
+  color: red;
+  text-align: left !important;
+}
+.login-warning {
+  color: red;
 }
