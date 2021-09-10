@@ -8,12 +8,9 @@ import SignupSuccess from "./features/Signup/SignupSuccess";
 import Footer from "./components/Footer/Footer";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
-import { Redirect } from "react-router";
 
 const App = () => {
   const [state, setState] = useState("login");
-  const [loggedIn, setLoggedIn] = useState(false);
-
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
   const submitForm = () => {
@@ -27,10 +24,9 @@ const App = () => {
     const token = cookies.get("token");
 
     if (token) {
-      setLoggedIn(true);
-      return <Redirect to={<Home />} />;
+      setState("home");
     }
-  });
+  }, []);
 
   return (
     <div className="App">

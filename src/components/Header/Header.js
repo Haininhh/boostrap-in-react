@@ -45,20 +45,6 @@ const Header = (props) => {
                 </Link>
 
                 <Nav className="ms-auto">
-                  {props.loginState === "login" ? (
-                    <Link to="/home" style={{ textDecoration: "none" }}>
-                      <Nav.Link
-                        className="navbar__link white-cl"
-                        href="/home"
-                        onClick={() => props.setState("home")}
-                      >
-                        Login
-                      </Nav.Link>
-                    </Link>
-                  ) : (
-                    <></>
-                  )}
-
                   {props.loginState === "home" ? (
                     <div className="user">
                       {user}
@@ -69,7 +55,10 @@ const Header = (props) => {
                             <Nav.Link
                               className="navbar__link white-cl"
                               href="/login"
-                              onClick={() => props.setState("login")}
+                              onClick={() => {
+                                cookies.remove('token');
+                                props.setState("login");
+                              }}
                             >
                               Logout
                             </Nav.Link>
