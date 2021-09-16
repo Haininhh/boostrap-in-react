@@ -10,36 +10,11 @@ import axios from "axios";
 
 const Signup = (props) => {
   const registerAPIUrl = "http://35.213.94.95:8899/api/users/register";
-  /* Event */
 
-  /* Change data */
-  const handleChange = (event) => {
-    setvalues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  /* Default btn and handle api */
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
+  const [errors, setErrors] = useState({ Validation });
   const [warning, setWarning] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors(Validation(values));
-
-    await axios
-      .post(registerAPIUrl, formData)
-      .then((res) => {
-        setDataIsCorrect(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setDataIsCorrect(false);
-      });
-  };
-
-  /* End: event */
   const [values, setvalues] = useState({
     username: "",
     password: "",
@@ -59,7 +34,28 @@ const Signup = (props) => {
     mobile_number: values.mobile_number,
   };
 
-  const [errors, setErrors] = useState({ Validation });
+  const handleChange = (event) => {
+    setvalues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+    console.log(values);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors(Validation(values));
+
+    await axios
+      .post(registerAPIUrl, formData)
+      .then((res) => {
+        setDataIsCorrect(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setDataIsCorrect(false);
+      });
+  };
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {

@@ -1,0 +1,30 @@
+ul {
+  font-style: 16px;
+  font-weight: bold;
+}
+ul li {
+  font-weight: normal;
+  /* padding-top: 10px; */
+}
+.question,
+.paginate {
+  width: 70%;
+}
+.question__time {
+  border: 1px solid green;
+  background-color: green;
+  color: #fff;
+}
+#dropdown-basic {
+  color: #212529 !important;
+  background-color: #ccc !important;
+  border: 1px solid #ccc !important;
+}
+#btn-dropdown {
+  color: #212529 !important;
+}
+.dropdown-menu {
+  min-width: 100px !important;
+  margin: -2px -9px !important;
+  padding: 0 !important;
+}

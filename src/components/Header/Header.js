@@ -1,37 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import {
-  BrowserRouter as Router,
-  Link,
-  Switch /* Redirect */,
-} from "react-router-dom";
-import axios from "axios";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import axios from "axios";
 import Cookies from "universal-cookie";
+import Question from "../../features/Questions/Question";
 
 const Header = (props) => {
-  const userInfoURLApi = "http://35.213.94.95:8899/api/users";
-  const [values, setValues] = useState({
-    username: "",
-  });
-  const [user, setUser] = useState();
-
-  /* Get token */
   const cookies = new Cookies();
-  const token = cookies.get("token");
-
-  /* Get user info */
-  const readUser = () => {
-    const instance = axios.create({
-      baseURL: userInfoURLApi,
-      headers: { Authorization: "Bearer " + token },
-    });
-
-    instance.get("/me").then((response) => {
-      values.username = response.data.username;
-      console.log(values.username);
-    });
-  };
 
   return (
     <Router>
@@ -40,50 +16,56 @@ const Header = (props) => {
           <header>
             <Navbar bg="primary" variant="dark">
               <Container>
-                <Link to="/home" style={{ textDecoration: "none" }}>
+                <Nav.Link to="/" style={{ textDecoration: "none" }}>
                   <Navbar.Brand href="/home">Home</Navbar.Brand>
-                </Link>
+                </Nav.Link>
 
                 <Nav className="ms-auto">
-                  {props.loginState === "login" ? (
-                    <Link to="/home" style={{ textDecoration: "none" }}>
+                  <div className="header-container d-flex">
+                    <div className="header-container__questions">
                       <Nav.Link
+                        to="/questions"
+                        style={{ textDecoration: "none" }}
                         className="navbar__link white-cl"
-                        href="/home"
-                        onClick={() => props.setState("home")}
+                        onClick={() => {
+                          props.setQuestion(true);
+                        }}
                       >
-                        Login
+                        Questions
                       </Nav.Link>
-                    </Link>
-                  ) : (
-                    <></>
-                  )}
-
-                  {props.loginState === "home" ? (
-                    <div className="user">
-                      {user}
-                      {
-                        <div className="userInfo">
-                          {values.username}
-                          <Link to="/login" style={{ textDecoration: "none" }}>
+                    </div>
+                    {props.loginState === "home" ? (
+                      <div className="user">
+                        {/* {user} */}
+                        {
+                          <div className="userInfo">
                             <Nav.Link
                               className="navbar__link white-cl"
+                              to="/login"
+                              style={{ textDecoration: "none" }}
                               href="/login"
-                              onClick={() => props.setState("login")}
+                              onClick={() => {
+                                cookies.remove("token");
+                                props.setState("login");
+                              }}
                             >
                               Logout
                             </Nav.Link>
-                          </Link>
-                        </div>
-                      }
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                          </div>
+                        }
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </Nav>
               </Container>
             </Navbar>
           </header>
+
+          <Route path="/questions">
+            <Question />
+          </Route>
         </React.Fragment>
       </Switch>
     </Router>

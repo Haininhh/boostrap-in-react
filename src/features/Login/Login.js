@@ -43,7 +43,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="content">
+    <div className="login-content">
       <Router>
         <Switch>
           <React.Fragment>

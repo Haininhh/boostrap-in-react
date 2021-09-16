@@ -8,29 +8,60 @@ import SignupSuccess from "./features/Signup/SignupSuccess";
 import Footer from "./components/Footer/Footer";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Cookies from "universal-cookie";
-import { Redirect } from "react-router";
+import axios from "axios";
+import Question from "./features/Questions/Question";
+import Paginations from "./features/Pagination/Pagination";
+import queryString from "query-string";
 
 const App = () => {
   const [state, setState] = useState("login");
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const [question, setQuestion] = useState(true);
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
+  const [postList, setPostList] = useState([]);
+  const [paginations, setPaginations] = useState({
+    offset: 0,
+    limit: 10,
+    total: 1,
+  });
+
+  const [filters, setFilters] = useState({
+    offset: 0,
+  });
 
   const submitForm = () => {
     setFormIsSubmitted(true);
   };
-
   /* Get token */
 
   useEffect(() => {
     const cookies = new Cookies();
     const token = cookies.get("token");
-
+    const currentPage = queryString.stringify(filters);
+    const requestURL = `http://35.213.94.95:8899/api/questions?limit=10&${currentPage}`;
     if (token) {
-      setLoggedIn(true);
-      return <Redirect to={<Home />} />;
+      setState("home");
     }
-  });
+    const instance = axios.create({
+      baseURL: requestURL,
+      headers: { Authorization: "Bearer " + token },
+    });
+
+    instance.get("").then((response) => {
+      const { data, total } = response.data;
+      setPostList(data);
+      setPaginations({
+        offset: filters.offset,
+        limit: 10,
+        total: total,
+      });
+    });
+  }, [filters]);
+
+  const handlePageChange = (currentPage) => {
+    setFilters({
+      offset: currentPage,
+    });
+  };
 
   return (
     <div className="App">
@@ -39,7 +70,23 @@ const App = () => {
       {state === "login" ? (
         <Login setState={setState} loginState={state} />
       ) : state === "home" ? (
-        <Home setState={setState} loginState={state} />
+        <>
+          {question === false ? (
+            <Home
+              setState={setState}
+              loginState={state}
+              setQuestion={setQuestion}
+            />
+          ) : (
+            <>
+              <Question posts={postList} />
+              <Paginations
+                paginations={paginations}
+                onPageChange={handlePageChange}
+              />
+            </>
+          )}
+        </>
       ) : (
         <div>
           {!formIsSubmitted ? (
