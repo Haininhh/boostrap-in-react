@@ -4,11 +4,9 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import axios from "axios";
 import Cookies from "universal-cookie";
-import Question from "../../features/Questions/Question";
+import Question from "../../features/QuestionList/Questions/Question";
 
 const Header = (props) => {
-  const cookies = new Cookies();
-
   return (
     <Router>
       <Switch>
@@ -28,7 +26,7 @@ const Header = (props) => {
                         style={{ textDecoration: "none" }}
                         className="navbar__link white-cl"
                         onClick={() => {
-                          props.setQuestion(true);
+                          props.setQuestion(false);
                         }}
                       >
                         Questions
@@ -45,6 +43,7 @@ const Header = (props) => {
                               style={{ textDecoration: "none" }}
                               href="/login"
                               onClick={() => {
+                                const cookies = new Cookies();
                                 cookies.remove("token");
                                 props.setState("login");
                               }}

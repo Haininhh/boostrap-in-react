@@ -25,6 +25,6 @@ ul li {
 }
 .dropdown-menu {
   min-width: 100px !important;
-  margin: -2px -9px !important;
+  /* margin: -2px -9px !important; */
   padding: 0 !important;
 }
