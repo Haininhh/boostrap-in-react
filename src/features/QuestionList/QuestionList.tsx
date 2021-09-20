@@ -5,8 +5,16 @@ import Cookies from "universal-cookie";
 import Paginations from "./Pagination/Pagination";
 import Question from "./Questions/Question";
 
+interface Postlist {
+  id: number;
+  name: string;
+  type: number;
+  difficulty: string;
+  expected_time: string;
+}
+
 const QuestionList = () => {
-  const [postList, setPostList] = useState([]);
+  const [postList, setPostList] = useState<Postlist | never[]>([]);
   const [paginations, setPaginations] = useState({
     offset: 0,
     limit: 10,
@@ -37,7 +45,7 @@ const QuestionList = () => {
     });
   }, [filters]);
 
-  const handlePageChange = (currentPage) => {
+  const handlePageChange = (currentPage: number) => {
     setFilters({
       offset: currentPage,
     });

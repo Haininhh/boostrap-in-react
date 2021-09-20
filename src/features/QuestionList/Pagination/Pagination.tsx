@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Container, Dropdown } from "react-bootstrap";
-import Pagination from "react-bootstrap/Pagination";
+import { Container, Dropdown, Pagination } from "react-bootstrap";
 import "./Pagination.css";
 
-const Paginations = (props) => {
-  const { paginations, onPageChange } = props;
+interface PaginationProps {
+  offset: number;
+  limit: number;
+  total: number;
+}
+
+interface Props {
+  paginations: PaginationProps;
+  onPageChange: (currentPage: number) => void;
+}
+const Paginations = ({ paginations, onPageChange }: Props) => {
   const { offset, limit, total } = paginations;
   const totalPages = Math.ceil(total / limit);
   const [active, setActive] = useState(0);
@@ -14,7 +22,7 @@ const Paginations = (props) => {
     pages.push(i);
   }
 
-  const handlePageChange = (currentPage) => {
+  const handlePageChange = (currentPage: number) => {
     onPageChange(currentPage);
     setActive(currentPage);
   };
