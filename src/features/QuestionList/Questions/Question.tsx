@@ -1,18 +1,12 @@
 import React from "react";
 import { Container, Table } from "react-bootstrap";
 import "../Pagination/Pagination.css";
+import { PostList } from "../QuestionList";
 
 interface Props {
-  posts: [
-    {
-      id: number;
-      name: string;
-      type: number;
-      difficulty: string;
-      expected_time: string;
-    }
-  ];
+  posts: PostList[];
 }
+
 const Question = ({ posts }: Props) => {
   return (
     <div className="content">

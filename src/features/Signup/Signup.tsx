@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent, ChangeEvent } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import Facebook from "../../assets/png/facebook.png";
 import search from "../../assets/png/search.png";
 import Left from "../../assets/png/left-arrow.png";
 import "../../features/Login/Login.css";
-import Validation from "../Validation/Validation";
+import * as Validation from "../Validation/Validation";
 import axios from "axios";
 
-const Signup = (props) => {
+interface Props {
+  submitForm: (param: boolean) => void;
+  setState: (param: string) => void;
+}
+
+const Signup = ({ submitForm, setState }: Props) => {
   const registerAPIUrl = "http://35.213.94.95:8899/api/users/register";
 
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
-  const [errors, setErrors] = useState({ Validation });
+  const [errors, setErrors] = useState<Values>({});
   const [warning, setWarning] = useState("");
-
-  const [values, setvalues] = useState({
+  const [values, setvalues] = useState<Users>({
     username: "",
     password: "",
     confirm: "",
@@ -34,7 +38,9 @@ const Signup = (props) => {
     mobile_number: values.mobile_number,
   };
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: ChangeEvent<{ name: string; value: string }>
+  ) => {
     setvalues({
       ...values,
       [event.target.name]: event.target.value,
@@ -42,9 +48,9 @@ const Signup = (props) => {
     console.log(values);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors(Validation(values));
+  const handleSubmit = async (event: MouseEvent) => {
+    event.preventDefault();
+    setErrors(values);
 
     await axios
       .post(registerAPIUrl, formData)
@@ -59,11 +65,11 @@ const Signup = (props) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && dataIsCorrect) {
-      props.submitForm(true);
+      submitForm(true);
     } else if (Object.keys(errors).length === 0) {
       setWarning("Username or password already existed! Please try again.");
     }
-  }, [errors, dataIsCorrect, props]);
+  }, [errors, dataIsCorrect, submitForm]);
 
   return (
     <div className="content">
@@ -193,7 +199,7 @@ const Signup = (props) => {
                   <Link to="/login" style={{ textDecoration: "none" }}>
                     <div
                       className="sub__login-newacc blue-cl fw-5"
-                      onClick={() => props.setState("login")}
+                      onClick={() => setState("login")}
                     >
                       <img
                         className="sub__login-leftArr"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import "../../features/Login/Login.css";
@@ -7,24 +7,34 @@ import search from "../../assets/png/search.png";
 import Cookies from "universal-cookie";
 import axios from "axios";
 
-const Login = (props) => {
+interface Props {
+  setState: (param: string) => void;
+}
+interface Info {
+  username: string;
+  password: string;
+}
+
+const Login = ({ setState }: Props) => {
   const loginURLAPI = "http://35.213.94.95:8899/api/users/authenticate";
   const cookies = new Cookies();
-  const [errors, setErrors] = useState(null);
-  const [values, setValues] = useState({
+  const [errors, setErrors] = useState("");
+  const [values, setValues] = useState<Info>({
     username: "",
-    passswords: "",
+    password: "",
   });
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: ChangeEvent<{ name: string; value: string }>
+  ) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value,
     });
   };
 
-  const handleLogin = async (e) => {
-    setErrors(null);
+  const handleLogin = async (e: MouseEvent) => {
+    // setErrors(null);
     e.preventDefault();
     await axios
       .post(loginURLAPI, {
@@ -33,7 +43,7 @@ const Login = (props) => {
       })
       .then((res) => {
         cookies.set("token", res.data.access_token, res.data.username);
-        props.setState("home");
+        setState("home");
       })
       .catch((err) => {
         if (err.response.status === 400 || err.response.status === 401) {
@@ -114,7 +124,7 @@ const Login = (props) => {
                   <Link to="/sigup" style={{ textDecoration: "none" }}>
                     <div
                       className="sub__login-newacc blue-cl fw-5"
-                      onClick={(handleSigup) => props.setState("sigup")}
+                      onClick={(handleSigup) => setState("sigup")}
                     >
                       Sig up New Account
                     </div>

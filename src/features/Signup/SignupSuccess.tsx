@@ -4,9 +4,12 @@ import { BrowserRouter as Link } from "react-router-dom";
 import Left from "../../assets/png/left-arrow.png";
 import "../../features/Login/Login.css";
 
-const SignupSuccess = (props) => {
+interface Props {
+  setState: (param: string) => void;
+}
+const SignupSuccess = ({ setState }: Props) => {
   const onClick = () => {
-    props.setState("login");
+    setState("login");
   };
   return (
     <div>
@@ -18,7 +21,7 @@ const SignupSuccess = (props) => {
               Account Created!
             </div>
             <div className="sub__login d-flex align-center justify-between">
-              <Link to="/login" style={{ textDecoration: "none" }}>
+              <Link /* to="/login" */ /* style={{ textDecoration: "none" }} */>
                 <div
                   className="sub__login-newacc blue-cl fw-5"
                   onClick={onClick}

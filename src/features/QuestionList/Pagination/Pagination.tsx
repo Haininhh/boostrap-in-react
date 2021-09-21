@@ -26,7 +26,6 @@ const Paginations = ({ paginations, onPageChange }: Props) => {
     onPageChange(currentPage);
     setActive(currentPage);
   };
-  console.log(active);
   return (
     <Container>
       <div className="paginate d-flex justify-right">

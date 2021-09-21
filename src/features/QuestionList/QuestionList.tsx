@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import Paginations from "./Pagination/Pagination";
 import Question from "./Questions/Question";
 
-interface Postlist {
+export interface PostList {
   id: number;
   name: string;
   type: number;
@@ -14,7 +14,7 @@ interface Postlist {
 }
 
 const QuestionList = () => {
-  const [postList, setPostList] = useState<Postlist | never[]>([]);
+  const [postList, setPostList] = useState<PostList[]>([]);
   const [paginations, setPaginations] = useState({
     offset: 0,
     limit: 10,

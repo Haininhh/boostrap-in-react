@@ -1,6 +1,18 @@
-const Validation = (values) => {
-  let errors = {};
+export interface Users {
+  username: string;
+  password: string;
+  confirm: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  mobile_number: string;
+}
+export interface Values {
+  values: Users;
+  errors: Users;
+}
 
+const Validation = ({ values, errors }: Values) => {
   if (!values.username.trim()) {
     errors.username = "Username required";
   }
