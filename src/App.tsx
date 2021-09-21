@@ -28,8 +28,6 @@ const App = () => {
     }
   }, []);
 
-  console.log(question);
-
   return (
     <div className="App">
       <Header
@@ -39,23 +37,13 @@ const App = () => {
       />
 
       {state === "login" ? (
-        <Login setState={setState} loginState={state} />
+        <Login setState={setState} />
       ) : state === "home" ? (
-        <>
-          {question === true ? (
-            <Home setState={setState} loginState={state} />
-          ) : (
-            <QuestionList />
-          )}
-        </>
+        <>{question === true ? <Home /> : <QuestionList />}</>
       ) : (
         <div>
           {!formIsSubmitted ? (
-            <Signup
-              setState={setState}
-              loginState={state}
-              submitForm={submitForm}
-            />
+            <Signup setState={setState} submitForm={submitForm} />
           ) : (
             <SignupSuccess setState={setState} />
           )}

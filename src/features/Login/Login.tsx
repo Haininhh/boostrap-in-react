@@ -16,6 +16,7 @@ interface Info {
 }
 
 const Login = ({ setState }: Props) => {
+  const required = { required: true };
   const loginURLAPI = "http://35.213.94.95:8899/api/users/authenticate";
   const cookies = new Cookies();
   const [errors, setErrors] = useState("");
@@ -83,7 +84,7 @@ const Login = ({ setState }: Props) => {
                   <Form.Group
                     className="mrb-3"
                     controlId="formBasicEmail"
-                    required
+                    {...required}
                   >
                     <Form.Control
                       className="login__form"
@@ -96,7 +97,7 @@ const Login = ({ setState }: Props) => {
                   <Form.Group
                     className="mrb-3"
                     controlId="formBasicPassword"
-                    required
+                    {...required}
                   >
                     <Form.Control
                       className="login__form"

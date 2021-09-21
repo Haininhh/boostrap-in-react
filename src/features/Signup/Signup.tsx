@@ -5,7 +5,7 @@ import Facebook from "../../assets/png/facebook.png";
 import search from "../../assets/png/search.png";
 import Left from "../../assets/png/left-arrow.png";
 import "../../features/Login/Login.css";
-import * as Validation from "../Validation/Validation";
+import { Users, Values } from "../Validation/Validation";
 import axios from "axios";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 
 const Signup = ({ submitForm, setState }: Props) => {
   const registerAPIUrl = "http://35.213.94.95:8899/api/users/register";
-
+  const required = { required: true };
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
   const [errors, setErrors] = useState<Values>({});
   const [warning, setWarning] = useState("");
@@ -99,7 +99,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                 </div>
                 <div className="login__or mrb-3 d-flex">Or</div>
                 <Form className="mrb-3">
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       placeholder="User name"
@@ -110,7 +110,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.username}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       type="password"
@@ -122,7 +122,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.password}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       type="password"
@@ -134,7 +134,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.confirm}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       placeholder="First name"
@@ -145,7 +145,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.firstname}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       placeholder="Last name"
@@ -156,7 +156,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.lastname}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       placeholder="Email address"
@@ -167,7 +167,7 @@ const Signup = ({ submitForm, setState }: Props) => {
                     <span className="form-message">{errors.email}</span>
                   </Form.Group>
 
-                  <Form.Group className="mrb-3" required>
+                  <Form.Group className="mrb-3" {...required}>
                     <Form.Control
                       className="login__form"
                       placeholder="Phone number"
