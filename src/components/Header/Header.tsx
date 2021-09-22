@@ -19,8 +19,12 @@ const Header = ({ setQuestion, setState, loginState }: Props) => {
           <header>
             <Navbar bg="primary" variant="dark">
               <Container>
-                <Nav.Link /* to="/" style={{  textDecoration: "none" }} */>
-                  <Navbar.Brand href="/home">Home</Navbar.Brand>
+                <Nav.Link >
+                  <Navbar.Brand href="/home"
+                   onClick={() => {
+                    setQuestion(true);
+                  }}
+                  >Home</Navbar.Brand>
                 </Nav.Link>
 
                 <Nav className="ms-auto">

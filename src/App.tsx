@@ -12,7 +12,7 @@ import SignupSuccess from "./features/Signup/SignupSuccess";
 
 const App = () => {
   const [state, setState] = useState("login");
-  const [question, setQuestion] = useState(false);
+  const [question, setQuestion] = useState(true);
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
   const submitForm = () => {

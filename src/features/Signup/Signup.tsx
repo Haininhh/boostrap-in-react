@@ -5,7 +5,7 @@ import Facebook from "../../assets/png/facebook.png";
 import search from "../../assets/png/search.png";
 import Left from "../../assets/png/left-arrow.png";
 import "../../features/Login/Login.css";
-import { Users, Values } from "../Validation/Validation";
+import { Users } from "../Validation/Validation";
 import axios from "axios";
 
 interface Props {
@@ -17,7 +17,15 @@ const Signup = ({ submitForm, setState }: Props) => {
   const registerAPIUrl = "http://35.213.94.95:8899/api/users/register";
   const required = { required: true };
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
-  const [errors, setErrors] = useState<Values>({});
+  const [errors, setErrors] = useState<Users>({
+    username: "",
+    password: "",
+    confirm: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    mobile_number: "",
+  });
   const [warning, setWarning] = useState("");
   const [values, setvalues] = useState<Users>({
     username: "",
