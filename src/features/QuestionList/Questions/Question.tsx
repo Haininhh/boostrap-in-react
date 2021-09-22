@@ -5,9 +5,13 @@ import { PostList } from "../QuestionList";
 
 interface Props {
   posts: PostList[];
+  setInfoQuestion: (param: boolean) => void
 }
 
-const Question = ({ posts }: Props) => {
+const Question = ({ posts, setInfoQuestion }: Props) => {
+  const handleRedirectInfoQuestion = () => {
+    setInfoQuestion(true)
+  }
   return (
     <div className="content">
       <Container>
@@ -23,7 +27,7 @@ const Question = ({ posts }: Props) => {
             </thead>
             <tbody>
               {posts.map((post) => (
-                <tr key={post.id}>
+                <tr key={post.id} className="cursor-point" onClick={handleRedirectInfoQuestion}>
                   <td className="blue-cl p-10">{post.name}</td>
                   <td className="text-center p-10">{post.type}</td>
                   <td className="text-center p-10">

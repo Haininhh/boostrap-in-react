@@ -25,6 +25,9 @@ const QuestionList = () => {
   const [filters, setFilters] = useState({
     offset: 0,
   });
+
+  const [infoQuestion, setInfoQuestion] = useState(false)
+  /* useEffect get Data */
   useEffect(() => {
     const currentPage = queryString.stringify(filters);
     const requestURL = `http://35.213.94.95:8899/api/questions?limit=10&${currentPage}`;
@@ -51,11 +54,16 @@ const QuestionList = () => {
       offset: currentPage,
     });
   };
+
   return (
-    <div>
-      <Question posts={postList} />
-      <Paginations paginations={paginations} onPageChange={handlePageChange} />
-      <InfoQuestion />
+    <div className="question-list">
+      {infoQuestion === false ?
+        (<>
+          <Question setInfoQuestion={setInfoQuestion} posts={postList} />
+          <Paginations paginations={paginations} onPageChange={handlePageChange} />
+        </>) :
+        <InfoQuestion />
+      }
     </div>
   );
 };

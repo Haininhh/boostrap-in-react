@@ -66,3 +66,6 @@ ul {
 .p-10 {
   padding: 12px !important;
 }
+.cursor-point {
+  cursor: pointer;
+}
