@@ -2,6 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
+import InfoQuestion from "./InfoQuestion/InfoQuestion";
 import Paginations from "./Pagination/Pagination";
 import Question from "./Questions/Question";
 
@@ -54,6 +55,7 @@ const QuestionList = () => {
     <div>
       <Question posts={postList} />
       <Paginations paginations={paginations} onPageChange={handlePageChange} />
+      <InfoQuestion />
     </div>
   );
 };
