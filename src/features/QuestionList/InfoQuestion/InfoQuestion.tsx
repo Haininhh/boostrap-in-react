@@ -2,7 +2,7 @@ import axios from "axios";
 import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
-import MirrorQuestion from "./CodeMirror/MirrorQuestion";
+import Editor from "./Editor/Editor";
 import "./InfoQuestion.css";
 
 interface Id {
@@ -29,7 +29,7 @@ const InfoQuestion = ({ id }: Id) => {
   return (
     <div className="content d-flex justify-between">
       <div className="question-left ml-2">{parse(datas)}</div>
-      <MirrorQuestion />
+      <Editor />
     </div>
   );
 };
