@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
 import axios from "axios";
 import parse from "html-react-parser";
-import { UnControlled as CodeMirror } from "react-codemirror2";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/material.css";
+import React, { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
+import MirrorQuestion from "./CodeMirror/MirrorQuestion";
+import "./InfoQuestion.css";
 
-const InfoQuestion = () => {
+interface Id {
+  id: number;
+}
+
+const InfoQuestion = ({ id }: Id) => {
   const [datas, setDatas] = useState("");
 
   useEffect(() => {
-    const getInfoQuestionURL = "http://35.213.94.95:8899/api/questions/513";
+    const getInfoQuestionURL = `http://35.213.94.95:8899/api/questions/${id}`;
     const cookies = new Cookies();
     const token = cookies.get("token");
     const instance = axios.create({
@@ -24,17 +27,9 @@ const InfoQuestion = () => {
   });
 
   return (
-    <div className="content">
-      {parse(datas)}
-      <CodeMirror
-        value="<h1>I ♥ react-codemirror2</h1>"
-        options={{
-          mode: "xml",
-          theme: "material",
-          lineNumbers: true,
-        }}
-        onChange={(editor, data, value) => {}}
-      />
+    <div className="content d-flex justify-between">
+      <div className="question-left ml-2">{parse(datas)}</div>
+      <MirrorQuestion />
     </div>
   );
 };

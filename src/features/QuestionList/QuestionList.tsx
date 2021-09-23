@@ -26,7 +26,10 @@ const QuestionList = () => {
     offset: 0,
   });
 
-  const [infoQuestion, setInfoQuestion] = useState(false)
+  const [infoQuestion, setInfoQuestion] = useState(false);
+
+  const [id, setId] = useState(0);
+
   /* useEffect get Data */
   useEffect(() => {
     const currentPage = queryString.stringify(filters);
@@ -57,13 +60,21 @@ const QuestionList = () => {
 
   return (
     <div className="question-list">
-      {infoQuestion === false ?
-        (<>
-          <Question setInfoQuestion={setInfoQuestion} posts={postList} />
-          <Paginations paginations={paginations} onPageChange={handlePageChange} />
-        </>) :
-        <InfoQuestion />
-      }
+      {infoQuestion === false ? (
+        <>
+          <Question
+            setInfoQuestion={setInfoQuestion}
+            posts={postList}
+            getIds={setId}
+          />
+          <Paginations
+            paginations={paginations}
+            onPageChange={handlePageChange}
+          />
+        </>
+      ) : (
+        <InfoQuestion id={id} />
+      )}
     </div>
   );
 };
