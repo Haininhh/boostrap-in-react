@@ -58,7 +58,7 @@
   margin-left: 2rem;
 }
 .content {
-  margin-top: 82px;
+  margin-top: 62px;
 }
 ul {
   list-style: none;
@@ -68,4 +68,7 @@ ul {
 }
 .cursor-point {
   cursor: pointer;
+}
+.bg-cl-grey {
+  background-color: #f0f0f0;
 }

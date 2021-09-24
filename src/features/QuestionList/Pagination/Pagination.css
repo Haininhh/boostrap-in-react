@@ -6,7 +6,10 @@ ul li {
   font-weight: normal;
   /* padding-top: 10px; */
 }
-.question,
+.question {
+  width: 70%;
+  padding: 20px 0 0;
+}
 .paginate {
   width: 70%;
 }

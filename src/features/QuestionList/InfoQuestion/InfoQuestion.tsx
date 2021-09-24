@@ -16,19 +16,22 @@ const InfoQuestion = ({ id }: Id) => {
     const getInfoQuestionURL = `http://35.213.94.95:8899/api/questions/${id}`;
     const cookies = new Cookies();
     const token = cookies.get("token");
-    const instance = axios.create({
-      baseURL: getInfoQuestionURL,
-      headers: { Authorization: "Bearer " + token },
-    });
-    instance.get("").then((response) => {
-      const { question_text } = response.data;
-      setDatas(question_text);
-    });
+    const getQuestionText = async () => {
+      const instance = axios.create({
+        baseURL: getInfoQuestionURL,
+        headers: { Authorization: "Bearer " + token },
+      });
+      await instance.get("").then((response) => {
+        const { question_text } = response.data;
+        setDatas(question_text);
+      });
+    };
+    getQuestionText();
   });
 
   return (
-    <div className="content d-flex justify-between">
-      <div className="question-left ml-2">{parse(datas)}</div>
+    <div className="content bg-cl-grey d-flex justify-between">
+      <div className="question-left bg-cl">{parse(datas)}</div>
       <Editor />
     </div>
   );

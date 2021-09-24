@@ -14,26 +14,25 @@ interface Props {
 }
 
 const MirrorQuestion = ({ language, displayName, value, onChange }: Props) => {
-  // const [value, setValue] = useState("");
-
-  const handleChange = (/* editor, data,  */ value: string) => {
+  const handleChange = (editor: string, data: string, value: string) => {
     onChange(value);
   };
   return (
-    <div>
-      <div className="editor-container">
-        <div className="editor-title">Language: C++</div>
+    <div className="editor-content">
+      <div className="editor-content__language">
+        <div className="editor-title fw-5">Language: {displayName}</div>
       </div>
-      <div>
+      <div className="editor-content__mirror">
         <CodeMirror
+          onBeforeChange={handleChange}
+          className="editor__codemirror"
           value={value}
           options={{
             lineWrapping: true,
             lint: true,
-            lineNumbers: true,
+            // lineNumbers: true,
             mode: language,
           }}
-          onBeforeChange={handleChange}
         />
       </div>
     </div>
