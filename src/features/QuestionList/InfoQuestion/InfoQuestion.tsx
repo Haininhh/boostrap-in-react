@@ -32,7 +32,7 @@ const InfoQuestion = ({ id }: Id) => {
   return (
     <div className="content bg-cl-grey d-flex justify-between">
       <div className="question-left bg-cl">{parse(datas)}</div>
-      <Editor />
+      <Editor id={id} />
     </div>
   );
 };

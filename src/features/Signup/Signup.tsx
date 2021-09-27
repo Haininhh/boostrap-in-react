@@ -53,7 +53,6 @@ const Signup = ({ submitForm, setState }: Props) => {
       ...values,
       [event.target.name]: event.target.value,
     });
-    console.log(values);
   };
 
   const handleSubmit = async (event: MouseEvent) => {
