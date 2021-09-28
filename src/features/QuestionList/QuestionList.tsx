@@ -1,10 +1,9 @@
-import axios from "axios";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
 import InfoQuestion from "./InfoQuestion/InfoQuestion";
 import Paginations from "./Pagination/Pagination";
 import Question from "./Questions/Question";
+import axiosInstance from "../axios/axiosInstance";
 
 export interface PostList {
   id: number;
@@ -30,18 +29,17 @@ const QuestionList = () => {
 
   const [id, setId] = useState(0);
 
+  const handlePageChange = (currentPage: number) => {
+    setFilters({
+      offset: currentPage,
+    });
+  };
+
   /* useEffect get Data */
   useEffect(() => {
     const currentPage = queryString.stringify(filters);
-    const requestURL = `http://35.213.94.95:8899/api/questions?limit=10&${currentPage}`;
-    const cookies = new Cookies();
-    const token = cookies.get("token");
-    const instance = axios.create({
-      baseURL: requestURL,
-      headers: { Authorization: "Bearer " + token },
-    });
-
-    instance.get("").then((response) => {
+    const requestURL = `/questions?limit=10&${currentPage}`;
+    axiosInstance.get(requestURL).then((response) => {
       const { data, total } = response.data;
       setPostList(data);
       setPaginations({
@@ -51,12 +49,6 @@ const QuestionList = () => {
       });
     });
   }, [filters]);
-
-  const handlePageChange = (currentPage: number) => {
-    setFilters({
-      offset: currentPage,
-    });
-  };
 
   return (
     <div className="question-list">

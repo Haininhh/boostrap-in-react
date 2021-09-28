@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MirrorQuestion from "../CodeMirror/MirrorQuestion";
-import Cookies from "universal-cookie";
+import axiosInstance from "../../../axios/axiosInstance";
 
 interface Props {
   id: number;
@@ -28,20 +27,12 @@ const Editor = ({ id }: Props) => {
   }, [js]);
 
   const getOutput = async () => {
-    const postValesURLAPI = "http://35.213.94.95:8899/api/preview/run-template";
-    const cookies = new Cookies();
-    const token = cookies.get("token");
     const solutionId = {
       solution: `${js}`,
       question_id: id,
     };
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    };
-    await axios
-      .post(postValesURLAPI, solutionId, config)
+    await axiosInstance
+      .post("/preview/run-template", solutionId)
       .then((res) => {
         console.log(res);
       })
