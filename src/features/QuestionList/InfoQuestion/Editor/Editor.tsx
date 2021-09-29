@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState /* useEffect */ } from "react";
 import MirrorQuestion from "../CodeMirror/MirrorQuestion";
 import axiosInstance from "../../../axios/axiosInstance";
 
@@ -10,31 +10,36 @@ const Editor = ({ id }: Props) => {
   const [js, setJs] = useState("");
   const [srcDoc, setSrcDoc] = useState("");
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSrcDoc(
-        `
-        <html>
-          <script>${js}</script>
-          </html>
-        `
-      );
-    }, 500);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setSrcDoc(
+  //       `
+  //       <html>
+  //         <script>${js}</script>
+  //         </html>
+  //       `
+  //     );
+  //   }, 500);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [js]);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [js]);
 
   const getOutput = async () => {
     const solutionId = {
-      solution: `${js}`,
+      solution: encodeURIComponent(`${js}`),
       question_id: id,
     };
     await axiosInstance
       .post("/preview/run-template", solutionId)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.output);
+        setSrcDoc(
+          `compile: ${res.data.output.compile},
+          ${" "}
+          data: ${res.data.output.data}`
+        );
       })
       .catch((err) => {
         console.log(err);

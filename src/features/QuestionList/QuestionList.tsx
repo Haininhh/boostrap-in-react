@@ -15,41 +15,40 @@ export interface PostList {
 
 const QuestionList = () => {
   const [postList, setPostList] = useState<PostList[]>([]);
+  const [infoQuestion, setInfoQuestion] = useState(false);
+  const [id, setId] = useState(0);
+  const [filters, setFilters] = useState({
+    offset: 50,
+  });
   const [paginations, setPaginations] = useState({
     offset: 0,
     limit: 10,
     total: 1,
   });
 
-  const [filters, setFilters] = useState({
-    offset: 0,
-  });
-
-  const [infoQuestion, setInfoQuestion] = useState(false);
-
-  const [id, setId] = useState(0);
+  /* useEffect get Data */
+  useEffect(() => {
+    const currentPage = queryString.stringify(filters);
+    const requestURL = `/questions?limit=10&${currentPage}`;
+    const getQuestionPage = async () => {
+      await axiosInstance.get(requestURL).then((response) => {
+        const { data, total } = response.data;
+        setPostList(data);
+        setPaginations({
+          offset: 50,
+          limit: 10,
+          total: total,
+        });
+      });
+    };
+    getQuestionPage();
+  }, [filters]);
 
   const handlePageChange = (currentPage: number) => {
     setFilters({
       offset: currentPage,
     });
   };
-
-  /* useEffect get Data */
-  useEffect(() => {
-    const currentPage = queryString.stringify(filters);
-    const requestURL = `/questions?limit=10&${currentPage}`;
-    axiosInstance.get(requestURL).then((response) => {
-      const { data, total } = response.data;
-      setPostList(data);
-      setPaginations({
-        offset: filters.offset,
-        limit: 10,
-        total: total,
-      });
-    });
-  }, [filters]);
-
   return (
     <div className="question-list">
       {infoQuestion === false ? (
